@@ -1,0 +1,54 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: matlaure <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/09/13 13:47:48 by matlaure          #+#    #+#              #
+#    Updated: 2022/09/19 16:04:49 by matlaure         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME	=	push_swap
+
+SRCS	= test.c
+
+OBJS	= ${SRCS:.c=.o}
+
+CC	= gcc
+
+LIB		=	-L./Libft -lft
+
+RM	= rm -f
+
+CFLAGS	= -Wall -Wextra -Werror
+
+all:	${NAME}
+
+${NAME}: ${OBJS}
+	make library
+	@${CC} ${CFLAGS} ${LIB} ${OBJS} -o ${NAME}
+	@echo "code compiled succesfully"
+	@make -C ./Libft/
+	@make -C ./Libft/
+
+library:	libft
+
+libft:
+	@make -s -C ./Libft
+	@echo "libft compiled"
+
+clean:
+		@${RM} ${OBJS}
+		@make -C Libft/ clean
+		@echo "\033[e33m object files removed\033[0m"
+
+fclean: clean
+		@${RM} ${NAME}
+		@make -C Libft/ fclean
+		@echo "\033[e33m ${NAME} removed\033[0m"
+
+re:	fclean all
+
+.PHONY: all clean fclean re

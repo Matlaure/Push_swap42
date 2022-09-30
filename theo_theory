@@ -1,0 +1,45 @@
+MAIN PARSEUR
+
+input :
+./pipex "1" "2" "3" "4" "5"      // ./pipex "1 2 3 
+utiliser ft_split pour convertir le second cas en cas #1.
+nouvel 'input' : un tableau de str, contenant un nombre/str.
+pour chaque nombre dans le tableau, en partant de la fin :
+		creer un nouveau maillon de list chainee (ft_lst_add_front)
+		verifier qu'il n'y ai pas de characters interdits
+		atoi le nombre (utiliser special atoi qui renvois un long int). le stocker dans un long_int temporaire
+		verrifier que INT_MIN < nb < INT_MAX
+		stocker le nombre dans le maillon
+checker les duplicatas
+ajouter les index au maillons.
+si le tableau de strings a ete genere par split (if ac == 2), free la memoire.
+
+a la fin : on as une list chainee, contenant un nombre par 'maillon'. on a egalement verifie qu'il n'y ai pas d'error utilisateur.
+
+================================================================================
+
+CHECK DUPLICATA
+compter les elements de la liste chaine. malloc un tableau d'int correspondant.
+crer une variable correspondant au nombre de maillon deja verifies.
+parcourir la liste chainee. pour chaque element :
+		comparer l'element dans le maillon courant avec n elements du tabeau d'int, ou n est le nomdre d'elements deja verifies
+		ajouter l'element de maillon courant au tableau, incrementer le nomdre de valeur checkes
+free le tableau d'int
+
+================================================================================
+
+INDEXER LES MAILLONS
+rapelle : chaque maillon contient une variable int index. cet index est initialise a -1.
+
+on definie une variable index initalise a 0.
+on definis 2 pointeurs sur list : cursor et smallest
+tant que index est inferieur au nombre d'element dans la liste :
+		on definis cursor sur le premier element de la liste.
+		tant que l'element est indexe (index > -1)
+				on saute a l'index suivant
+		on definis smallest sur l'element pointe par cursor (donc le premier element non indexe de la chaine)
+		tant que cursor NULL (aka tant qu'on est pas sortie de la chaine)
+				on avance cursor sur l'element suivant
+				si cursor (le nouveau du coup) n'est pas indexe(cursor->index > -1), et que cursor < smallest
+						on on fait pointe smallest sur cursor.
+		arrive a la fin de la chaine, on done la valeur index a l'ellement pointe par smallest
